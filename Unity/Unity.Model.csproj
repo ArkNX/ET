@@ -95,6 +95,7 @@
     <Compile Include="Assets\Model\Base\Object\BaseAttribute.cs" />
     <Compile Include="Assets\Model\Base\Object\Component.cs" />
     <Compile Include="Assets\Model\Base\Object\ComponentFactory.cs" />
+    <Compile Include="Assets\Model\Base\Object\ComponentView.cs" />
     <Compile Include="Assets\Model\Base\Object\ComponentWithId.cs" />
     <Compile Include="Assets\Model\Base\Object\Entity.cs" />
     <Compile Include="Assets\Model\Base\Object\EntityEventAttribute.cs" />
