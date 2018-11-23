@@ -3,6 +3,37 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace ETHotfix
 {
+#if !ILRuntime
+	public abstract class Component: ETModel.Component
+	{
+		[BsonIgnore]
+		public new Component Parent
+		{
+			get
+			{
+				return (Component) base.Parent;
+			}
+			set
+			{
+				base.Parent = value;
+			}
+		}
+		
+		public new T GetParent<T>() where T : Component
+		{
+			return this.Parent as T;
+		}
+
+		[BsonIgnore]
+		public new Entity Entity
+		{
+			get
+			{
+				return this.Parent as Entity;
+			}
+		}
+	}
+#else
 	[BsonIgnoreExtraElements]
 	public abstract class Component : Object, IDisposable
 	{
@@ -89,4 +120,5 @@ namespace ETHotfix
 			Game.EventSystem.Deserialize(this);
 		}
 	}
+#endif
 }

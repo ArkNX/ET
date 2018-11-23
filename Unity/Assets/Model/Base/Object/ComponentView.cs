@@ -1,17 +1,21 @@
+using System;
 using UnityEngine;
 
 namespace ETModel
 {
     public class ComponentView: MonoBehaviour
     {
-        public static GameObject Create(string name)
+        public Component Component { get; private set; }
+        
+        public static GameObject Create(Component component)
         {
-            if (name == "Scene")
+            Type type = component.GetType();
+            if (type.IsDefined(typeof(HideInInspector), false))
             {
-                Log.Debug($"11111111111111111111111111111111");
+                return null;
             }
-            GameObject gameObject = new GameObject(name);
-            gameObject.AddComponent<ComponentView>();
+            GameObject gameObject = new GameObject(type.Name);
+            gameObject.AddComponent<ComponentView>().Component = component;
             return gameObject;
         }
     }

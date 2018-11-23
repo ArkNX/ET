@@ -10,7 +10,7 @@ namespace ETModel
 	public abstract class Component : Object, IDisposable
 	{
 		[BsonIgnore]
-		public long InstanceId { get; private set; }
+		public long InstanceId { get; protected set; }
 
 		[BsonIgnore]
 		private bool isFromPool;
@@ -35,7 +35,7 @@ namespace ETModel
 				{
 					this.InstanceId = IdGenerater.GenerateId();
 #if UNITY_EDITOR
-					this.GameObject = ComponentView.Create(this.GetType().Name);
+					this.GameObject = ComponentView.Create(this);
 #endif
 				}
 
@@ -56,7 +56,7 @@ namespace ETModel
 		private Component parent;
 		
 		[BsonIgnore]
-		public Component Parent 
+		public Component Parent
 		{
 			get
 			{
@@ -93,7 +93,7 @@ namespace ETModel
 		{
 			this.InstanceId = IdGenerater.GenerateId();
 #if UNITY_EDITOR
-			this.GameObject = ComponentView.Create(this.GetType().Name);
+			this.GameObject = ComponentView.Create(this);
 #endif
 
 		}
