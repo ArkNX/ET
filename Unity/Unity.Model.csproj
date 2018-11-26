@@ -287,6 +287,10 @@
     <Compile Include="Assets\Model\Module\Demo\PlayerFactory.cs" />
     <Compile Include="Assets\Model\Module\Demo\SessionComponent.cs" />
     <Compile Include="Assets\Model\Module\Demo\TurnComponent.cs" />
+    <Compile Include="Assets\Model\Module\Demo\UI\UILoading\Component\UILoadingComponent.cs" />
+    <Compile Include="Assets\Model\Module\Demo\UI\UILoading\System\LoadingBeginEvent_CreateLoadingUI.cs" />
+    <Compile Include="Assets\Model\Module\Demo\UI\UILoading\System\LoadingFinishEvent_RemoveLoadingUI.cs" />
+    <Compile Include="Assets\Model\Module\Demo\UI\UILoading\System\UILoadingFactory.cs" />
     <Compile Include="Assets\Model\Module\Demo\Unit.cs" />
     <Compile Include="Assets\Model\Module\Demo\UnitComponent.cs" />
     <Compile Include="Assets\Model\Module\Demo\UnitConfig.cs" />
@@ -462,7 +466,6 @@
     <Compile Include="Assets\Model\Module\Pathfinding\Recast\TriangleMeshNode.cs" />
     <Compile Include="Assets\Model\Module\Pathfinding\Recast\WindowsStoreCompatibility.cs" />
     <Compile Include="Assets\Model\Module\UI\CanvasConfig.cs" />
-    <Compile Include="Assets\Model\Module\UI\IUIFactory.cs" />
     <Compile Include="Assets\Model\Module\UI\LayerNames.cs" />
     <Compile Include="Assets\Model\Module\UI\UI.cs" />
     <Compile Include="Assets\Model\Module\UI\UIComponent.cs" />
@@ -476,10 +479,6 @@
     <Compile Include="Assets\Model\Other\MonoStaticMethod.cs" />
     <Compile Include="Assets\Model\Other\MotionType.cs" />
     <Compile Include="Assets\Model\Other\ReferenceCollector.cs" />
-    <Compile Include="Assets\Model\UI\UILoading\Component\UILoadingComponent.cs" />
-    <Compile Include="Assets\Model\UI\UILoading\Event\LoadingBeginEvent_CreateLoadingUI.cs" />
-    <Compile Include="Assets\Model\UI\UILoading\Event\LoadingFinishEvent_RemoveLoadingUI.cs" />
-    <Compile Include="Assets\Model\UI\UILoading\Factory\UILoadingFactory.cs" />
     <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\ExampleScenes\Materials\DiffuseAlwaysVisible.shader" />
     <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\ExampleScenes\_Example Scenes.txt" />
     <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\Readme_upgrading.txt" />

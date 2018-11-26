@@ -91,10 +91,20 @@
     <Compile Include="Assets\Hotfix\Module\Config\IConfig.cs" />
     <Compile Include="Assets\Hotfix\Module\Demo\Actor_TestHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Demo\G2C_TestHotfixHandler.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\Helper\LoginHelper.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\Helper\MapHelper.cs" />
     <Compile Include="Assets\Hotfix\Module\Demo\M2C_CreateUnitsHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Demo\M2C_PathfindingResultHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Demo\OperaComponent.cs" />
     <Compile Include="Assets\Hotfix\Module\Demo\TestHotfixSubscribMonoEvent_LogString.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\UI\UILobby\Component\UILobbyComponent.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\UI\UILobby\System\EnterMapFinish_RemoveLobbyUI.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\UI\UILobby\System\LoginFinish_CreateLobbyUI.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\UI\UILobby\System\UILobbyFactory.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\UI\UILogin\Component\UILoginComponent.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\UI\UILogin\System\InitSceneStart_CreateLoginUI.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\UI\UILogin\System\LoginFinish_RemoveLoginUI.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\UI\UILogin\System\UILoginFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\AMHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\HotfixMessage.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\HotfixMessageDispatcher.cs" />
@@ -111,11 +121,6 @@
     <Compile Include="Assets\Hotfix\Module\UI\UIComponent.cs" />
     <Compile Include="Assets\Hotfix\Module\UI\UIType.cs" />
     <Compile Include="Assets\Hotfix\Properties\AssemblyInfo.cs" />
-    <Compile Include="Assets\Hotfix\UI\UILobby\Component\UILobbyComponent.cs" />
-    <Compile Include="Assets\Hotfix\UI\UILobby\Factory\UILobbyFactory.cs" />
-    <Compile Include="Assets\Hotfix\UI\UILogin\Component\UILoginComponent.cs" />
-    <Compile Include="Assets\Hotfix\UI\UILogin\Event\InitSceneStart_CreateLoginUI.cs" />
-    <Compile Include="Assets\Hotfix\UI\UILogin\Factory\UILoginFactory.cs" />
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Apps/Unity 2018.3.0b9/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

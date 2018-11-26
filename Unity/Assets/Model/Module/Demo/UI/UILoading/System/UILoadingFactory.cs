@@ -3,14 +3,13 @@ using UnityEngine;
 
 namespace ETModel
 {
-    [UIFactory(UIType.UILoading)]
-    public class UILoadingFactory : IUIFactory
+    public static class UILoadingFactory
     {
-        public UI Create(Scene scene, string type, GameObject gameObject)
+        public static UI Create()
         {
 	        try
 	        {
-				GameObject bundleGameObject = ((GameObject)ResourcesHelper.Load("KV")).Get<GameObject>(type);
+				GameObject bundleGameObject = ((GameObject)ResourcesHelper.Load("KV")).Get<GameObject>(UIType.UILoading);
 				GameObject go = UnityEngine.Object.Instantiate(bundleGameObject);
 				go.layer = LayerMask.NameToLayer(LayerNames.UI);
 				UI ui = ComponentFactory.Create<UI, GameObject>(go);
@@ -25,7 +24,7 @@ namespace ETModel
 	        }
 		}
 
-	    public void Remove(string type)
+	    public static void Remove(string type)
 	    {
 	    }
     }

@@ -5,7 +5,8 @@
     {
         public override void Run()
         {
-			Game.Scene.GetComponent<UIComponent>().Create(UIType.UILoading);
+            UI uiLoading = UILoadingFactory.Create();
+			Game.Scene.GetComponent<UIComponent>().Add(uiLoading);
         }
     }
 }

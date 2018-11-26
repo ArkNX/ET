@@ -75,13 +75,17 @@ namespace ETModel
 					return;
 				}
 
-				if (this.GameObject != null)
+				if (this.GameObject == null)
 				{
-					if (this.parent.GameObject != null)
-					{
-						this.GameObject.transform.SetParent(this.parent.GameObject.transform, false);
-					}
+					return;
 				}
+
+				if (this.parent.GameObject == null)
+				{
+					return;
+				}
+
+				this.GameObject.transform.SetParent(this.parent.GameObject.transform, false);
 #endif
 			} 
 		}
@@ -107,7 +111,8 @@ namespace ETModel
 			if (!this.GetType().IsDefined(typeof(HideInHierarchy), true))
 			{
 				this.GameObject = new GameObject();
-				this.GameObject.layer = LayerMask.GetMask("Hidden");
+				this.GameObject.name = this.GetType().Name;
+				this.GameObject.layer = LayerNames.GetLayerInt(LayerNames.HIDDEN);
 				this.GameObject.AddComponent<ComponentView>().Component = this;
 			}
 #endif

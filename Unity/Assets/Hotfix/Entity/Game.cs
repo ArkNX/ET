@@ -13,6 +13,7 @@
 					return scene;
 				}
 				scene = new Scene();
+				scene.GameObject.transform.SetParent(scene.GameObject.transform.Find("/Global"));
 				return scene;
 			}
 		}
