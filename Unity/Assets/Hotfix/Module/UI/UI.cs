@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ETModel;
 using UnityEngine;
 
 namespace ETHotfix
@@ -12,6 +13,7 @@ namespace ETHotfix
 		}
 	}
 	
+	[HideInHierarchy]
 	public sealed class UI: Entity
 	{
 		public string Name

@@ -15,7 +15,7 @@ namespace ETHotfix
 				GameObject bundleGameObject = (GameObject)resourcesComponent.GetAsset(UIType.UILobby.StringToAB(), UIType.UILobby);
 				GameObject lobby = UnityEngine.Object.Instantiate(bundleGameObject);
 				lobby.layer = LayerMask.NameToLayer(LayerNames.UI);
-				UI ui = ComponentFactory.Create<UI, GameObject>(lobby);
+				UI ui = ComponentFactory.Create<UI, GameObject>(lobby, false);
 
 				ui.AddComponent<UILobbyComponent>();
 				return ui;

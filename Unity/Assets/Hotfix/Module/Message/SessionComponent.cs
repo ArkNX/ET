@@ -26,7 +26,11 @@ namespace ETHotfix
 			set
 			{
 				this.session = value;
-				this.session.Parent = this;
+				
+				if (this.session != null)
+				{
+					this.session.Parent = this;
+				}
 			}
 		}
 

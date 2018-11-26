@@ -120,7 +120,6 @@
     <Compile Include="Assets\Hotfix\Module\UI\UI.cs" />
     <Compile Include="Assets\Hotfix\Module\UI\UIComponent.cs" />
     <Compile Include="Assets\Hotfix\Module\UI\UIType.cs" />
-    <Compile Include="Assets\Hotfix\Properties\AssemblyInfo.cs" />
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Apps/Unity 2018.3.0b9/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

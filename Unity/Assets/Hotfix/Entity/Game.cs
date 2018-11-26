@@ -12,7 +12,7 @@
 				{
 					return scene;
 				}
-				scene = new Scene();
+				scene = new Scene() { Name = "ClientHotfix" };
 				scene.GameObject.transform.SetParent(scene.GameObject.transform.Find("/Global"));
 				return scene;
 			}

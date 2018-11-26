@@ -41,8 +41,6 @@ namespace ETHotfix
 				{
 					this.InstanceId = IdGenerater.GenerateId();
 				}
-
-				Game.EventSystem.Add(this);
 			}
 		}
 
