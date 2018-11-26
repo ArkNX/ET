@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using ETModel;
+using ILRuntime.Runtime.Intepreter;
 using UnityEditor;
 using UnityEngine;
 using Component = ETModel.Component;
@@ -14,14 +15,18 @@ namespace ETEditor
         public override void OnInspectorGUI()
         {
             ComponentView componentView = (ComponentView) target;
-            Component component = componentView.Component;
+            object component = componentView.Component;
+            if (component.GetType() == typeof (ILTypeInstance))
+            {
+                return;
+            }
             ComponentViewHelper.Draw(component);
         }
     }
 
     public static class ComponentViewHelper
     {
-        private static List<ITypeDrawer> typeDrawers = new List<ITypeDrawer>();
+        private static readonly List<ITypeDrawer> typeDrawers = new List<ITypeDrawer>();
 
         static ComponentViewHelper()
         {

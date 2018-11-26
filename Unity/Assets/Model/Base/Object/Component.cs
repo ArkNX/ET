@@ -1,4 +1,5 @@
 ﻿using System;
+using ETModel;
 using MongoDB.Bson.Serialization.Attributes;
 #if UNITY_EDITOR
 using UnityEngine;
@@ -11,6 +12,11 @@ namespace ETModel
 	{
 		[BsonIgnore]
 		public long InstanceId { get; protected set; }
+		
+#if !SERVER
+		[BsonIgnore]
+		public GameObject GameObject { get; protected set; }
+#endif
 
 		[BsonIgnore]
 		private bool isFromPool;
@@ -34,13 +40,9 @@ namespace ETModel
 				if (this.InstanceId == 0)
 				{
 					this.InstanceId = IdGenerater.GenerateId();
-#if UNITY_EDITOR
-					this.GameObject = ComponentView.Create(this);
-#endif
 				}
 
 				Game.EventSystem.Add(this);
-
 			}
 		}
 
@@ -65,8 +67,21 @@ namespace ETModel
 			set
 			{
 				this.parent = value;
-#if UNITY_EDITOR
-				this.GameObject.transform.SetParent(this.parent.GameObject.transform, false);
+
+#if !SERVER
+				if (this.parent == null)
+				{
+					this.GameObject.transform.SetParent(GameObject.Find("/Global").transform, false);
+					return;
+				}
+
+				if (this.GameObject != null)
+				{
+					if (this.parent.GameObject != null)
+					{
+						this.GameObject.transform.SetParent(this.parent.GameObject.transform, false);
+					}
+				}
 #endif
 			} 
 		}
@@ -85,18 +100,19 @@ namespace ETModel
 			}
 		}
 		
-#if UNITY_EDITOR
-		GameObject GameObject;
-#endif
-		
 		protected Component()
 		{
 			this.InstanceId = IdGenerater.GenerateId();
-#if UNITY_EDITOR
-			this.GameObject = ComponentView.Create(this);
+#if !SERVER
+			if (!this.GetType().IsDefined(typeof(HideInHierarchy), true))
+			{
+				this.GameObject = new GameObject();
+				this.GameObject.layer = LayerMask.GetMask("Hidden");
+				this.GameObject.AddComponent<ComponentView>().Component = this;
+			}
 #endif
-
 		}
+
 
 		public virtual void Dispose()
 		{
@@ -104,13 +120,6 @@ namespace ETModel
 			{
 				return;
 			}
-			
-#if UNITY_EDITOR
-			if (this.GameObject != null)
-			{
-				UnityEngine.Object.Destroy(this.GameObject);
-			}
-#endif
 			
 			// 触发Destroy事件
 			Game.EventSystem.Destroy(this);
@@ -122,6 +131,12 @@ namespace ETModel
 			if (this.IsFromPool)
 			{
 				Game.ObjectPool.Recycle(this);
+			}
+			else
+			{
+#if !SERVER
+				UnityEngine.Object.Destroy(this.GameObject);
+#endif
 			}
 		}
 

@@ -99,6 +99,7 @@ namespace ETHotfix
 			try
 			{
 				UI ui = UiTypes[type].Create(this.GetParent<Scene>(), type, Root);
+				ui.Parent = this;
                 uis.Add(type, ui);
 
 				// 设置canvas
@@ -115,6 +116,7 @@ namespace ETHotfix
 		public void Add(string type, UI ui)
 		{
 			this.uis.Add(type, ui);
+			ui.Parent = this;
 		}
 
 		public void Remove(string type)

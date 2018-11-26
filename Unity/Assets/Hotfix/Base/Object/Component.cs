@@ -1,44 +1,22 @@
-﻿using ETModel;
+﻿using System;
+using ETModel;
 using MongoDB.Bson.Serialization.Attributes;
+#if UNITY_EDITOR
+using UnityEngine;
+#endif
 
 namespace ETHotfix
 {
-#if !ILRuntime
-	public abstract class Component: ETModel.Component
-	{
-		[BsonIgnore]
-		public new Component Parent
-		{
-			get
-			{
-				return (Component) base.Parent;
-			}
-			set
-			{
-				base.Parent = value;
-			}
-		}
-		
-		public new T GetParent<T>() where T : Component
-		{
-			return this.Parent as T;
-		}
-
-		[BsonIgnore]
-		public new Entity Entity
-		{
-			get
-			{
-				return this.Parent as Entity;
-			}
-		}
-	}
-#else
 	[BsonIgnoreExtraElements]
 	public abstract class Component : Object, IDisposable
 	{
 		[BsonIgnore]
 		public long InstanceId { get; protected set; }
+		
+#if !SERVER
+		[BsonIgnore]
+		public GameObject GameObject { get; protected set; }
+#endif
 
 		[BsonIgnore]
 		private bool isFromPool;
@@ -59,7 +37,11 @@ namespace ETHotfix
 					return;
 				}
 
-				this.InstanceId = IdGenerater.GenerateId();
+				if (this.InstanceId == 0)
+				{
+					this.InstanceId = IdGenerater.GenerateId();
+				}
+
 				Game.EventSystem.Add(this);
 			}
 		}
@@ -73,8 +55,36 @@ namespace ETHotfix
 			}
 		}
 
+		private Component parent;
+		
 		[BsonIgnore]
-		public Component Parent { get; set; }
+		public Component Parent
+		{
+			get
+			{
+				return this.parent;
+			}
+			set
+			{
+				this.parent = value;
+
+#if !SERVER
+				if (this.parent == null)
+				{
+					this.GameObject.transform.SetParent(GameObject.Find("/Global").transform, false);
+					return;
+				}
+
+				if (this.GameObject != null)
+				{
+					if (this.parent.GameObject != null)
+					{
+						this.GameObject.transform.SetParent(this.parent.GameObject.transform, false);
+					}
+				}
+#endif
+			} 
+		}
 
 		public T GetParent<T>() where T : Component
 		{
@@ -89,12 +99,21 @@ namespace ETHotfix
 				return this.Parent as Entity;
 			}
 		}
-
+		
 		protected Component()
 		{
 			this.InstanceId = IdGenerater.GenerateId();
+#if !SERVER
+			if (!this.GetType().IsDefined(typeof(HideInHierarchy), true))
+			{
+				this.GameObject = new GameObject();
+				this.GameObject.layer = LayerMask.GetMask("Hidden");
+				this.GameObject.AddComponent<ComponentView>().Component = this;
+			}
+#endif
 		}
-		
+
+
 		public virtual void Dispose()
 		{
 			if (this.IsDisposed)
@@ -106,12 +125,18 @@ namespace ETHotfix
 			Game.EventSystem.Destroy(this);
 
 			Game.EventSystem.Remove(this.InstanceId);
-
+			
 			this.InstanceId = 0;
 
 			if (this.IsFromPool)
 			{
 				Game.ObjectPool.Recycle(this);
+			}
+			else
+			{
+#if !SERVER
+				UnityEngine.Object.Destroy(this.GameObject);
+#endif
 			}
 		}
 
@@ -119,6 +144,10 @@ namespace ETHotfix
 		{
 			Game.EventSystem.Deserialize(this);
 		}
+		
+		public override string ToString()
+		{
+			return MongoHelper.ToJson(this);
+		}
 	}
-#endif
 }

@@ -22,8 +22,6 @@ namespace ETHotfix
 			}
 		}
 
-		public GameObject GameObject { get; private set; }
-
 		public Dictionary<string, UI> children = new Dictionary<string, UI>();
 		
 		public void Awake(GameObject gameObject)
