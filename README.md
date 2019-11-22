@@ -91,6 +91,7 @@ ET框架的服务端是一个强大灵活的分布式服务端架构，完全可
 1. [养不大](https://www.taptap.com/app/71064)  
 2. 天天躲猫猫2（ios2019春节下载排行19）  
 3. [牛虎棋牌](https://gitee.com/ECPS_admin/PlanB)  
+4. [五星麻将](https://github.com/wufanjoin/fivestar)  
 
 群友demo：  
 1. [斗地主（客户端服务端）](https://github.com/Viagi/LandlordsCore)  
@@ -110,6 +111,15 @@ ET框架的服务端是一个强大灵活的分布式服务端架构，完全可
 [各种dotnet core项目收集](https://github.com/thangchung/awesome-dotnet-core)  
 
 __讨论QQ群 : 474643097__
+
+# ET 6.0发布beta版! 
+1.协程锁功能，解决异步队列的大杀器  
+2.抽象出Scene的概念,realm gate map location等等,都是一个个scene, 进程变成了容器，可以容纳各种Scene  
+3.内网消息全部使用Actor消息，一个Scene也是一个actor  
+4.升级到netcore3.0
+5.还有大量更新,等你去挖掘,这是beta版本,暂时ilrt没有调通,只用来学习思想,不保证正确,出了bug不要怪我  
+6.招聘一个中级渲染, 工作地点厦门,待遇优厚  
+......
 
 # ET 5.0发布! 5.0将是一个长期支持版本，之后发现的bug，5.0也会进行修复  
 1.增加了服务端3d recast寻路功能，客户端导出数据，服务端使用，做mmo及其方便  
